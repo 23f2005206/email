@@ -1,0 +1,10 @@
+name: My Assignment Action
+
+on: [push]  # This "triggers" the robot whenever you save changes
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # The type of virtual computer to use
+    steps:
+      - name: 23f2005206@ds.study.iitm.ac.in
+        run: echo "Action successfully triggered!"
