@@ -13,11 +13,17 @@ jobs:
         id: my-cache-step
         uses: actions/cache@v4
         with:
-          # This is the "folder" we are pretending to cache
           path: my-deps-folder
-          # This is the specific key required by your assignment
           key: cache-a05c161
 
       - name: prime-cache-a05c161
         run: |
           echo "Cache hit: ${{ steps.my-cache-step.outputs.cache-hit }}"
+
+      # THIS STEP IS THE FIX:
+      # If the cache is missed, we MUST create the folder so it can be saved.
+      - name: Create dummy data
+        if: steps.my-cache-step.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p my-deps-folder
+          echo "primed" > my-deps-folder/data.txt
